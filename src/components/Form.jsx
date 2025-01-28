@@ -1,4 +1,5 @@
 import { useState } from "react";
+// import { useDispatch } from "react-redux";
 
 const Form = () => {
   const formatDate = (date) => {
@@ -15,9 +16,11 @@ const Form = () => {
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState(formattedDate);
+  // const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // dispatch();
     console.log(description);
     console.log(category);
     console.log(amount);

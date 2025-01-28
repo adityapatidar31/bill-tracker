@@ -1,10 +1,8 @@
-import { configureStores } from "@reduxjs/toolkit";
-import { billSlice } from "./features/bill/billSlice.js";
+import { configureStore } from "@reduxjs/toolkit";
+import billReducer from "./features/bill/billSlice";
 
-const store = configureStores({
+export const store = configureStore({
   reducer: {
-    bill: billSlice,
+    bill: billReducer,
   },
 });
-
-export default store;

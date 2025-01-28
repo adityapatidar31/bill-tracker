@@ -14,7 +14,7 @@ const initialState = {
   bills: [],
 };
 
-const accountSlice = createSlice({
+const billSlice = createSlice({
   name: "bill",
   initialState,
   reducers: {
@@ -24,6 +24,6 @@ const accountSlice = createSlice({
   },
 });
 
-export const { addBill } = accountSlice.actions;
+export const { addBill } = billSlice.actions;
 
-export default accountSlice.reducer;
+export default billSlice.reducer;
