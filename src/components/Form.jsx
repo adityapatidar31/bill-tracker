@@ -1,32 +1,26 @@
-import { useState } from "react";
 import { addBill } from "../features/bill/billSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addData, clearData } from "../features/form/formSlice";
 
 const Form = () => {
-  const formatDate = (date) => {
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-    return `${year}-${month}-${day}`;
-  };
-
-  const now = new Date();
-  const formattedDate = formatDate(now);
-
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [amount, setAmount] = useState("");
-  const [date, setDate] = useState(formattedDate);
+  const { description, category, amount, date, id } = useSelector(
+    (store) => store.form
+  );
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const bill = { description, category, amount: Number(amount), date };
-    setDescription("");
-    setCategory("");
-    setAmount("");
-    setDate(formattedDate);
+
+    const bill = { description, category, amount, date, id };
+    dispatch(clearData());
     dispatch(addBill(bill));
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    dispatch(
+      addData({ ...{ description, category, amount, date, id }, [name]: value })
+    );
   };
 
   return (
@@ -39,7 +33,7 @@ const Form = () => {
               type="text"
               name="description"
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={handleChange}
               required
               className="form-input"
             />
@@ -50,7 +44,7 @@ const Form = () => {
             <select
               name="category"
               value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={handleChange}
               required
               className="form-input"
             >
@@ -74,7 +68,7 @@ const Form = () => {
               name="amount"
               min="0"
               value={amount}
-              onChange={(e) => setAmount(e.target.value)}
+              onChange={handleChange}
               required
               className="form-input"
             />
@@ -86,7 +80,7 @@ const Form = () => {
               type="date"
               name="date"
               value={date}
-              onChange={(e) => setDate(e.target.value)}
+              onChange={handleChange}
               required
               className="form-input"
             />

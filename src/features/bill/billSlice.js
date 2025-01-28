@@ -36,13 +36,15 @@ const billSlice = createSlice({
   initialState,
   reducers: {
     addBill(state, action) {
-      action.payload.id = uuidv4();
-      console.log(action.payload);
+      action.payload.id = action.payload.id || uuidv4();
       state.bills.push(action.payload);
+    },
+    deleteBill(state, action) {
+      state.bills = state.bills.filter((bill) => bill.id !== action.payload);
     },
   },
 });
 
-export const { addBill } = billSlice.actions;
+export const { addBill, deleteBill, updateBill } = billSlice.actions;
 
 export default billSlice.reducer;
