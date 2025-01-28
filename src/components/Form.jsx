@@ -21,10 +21,6 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // dispatch();
-    console.log(description);
-    console.log(category);
-    console.log(amount);
-    console.log(date);
   };
 
   return (

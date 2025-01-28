@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+const { v4: uuidv4 } = require("uuid");
 
 // const bill = {
 // id:0,
