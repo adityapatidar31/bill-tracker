@@ -1,15 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 
-// const bill = {
-// id:0,
-//   amount: 300,
-//   category: "",
-//   isHighlighted: false,
-// description:"",
-//   date: Date.now(),
-// };
-
 const initialState = {
   totalAmount: 0,
   bills: [

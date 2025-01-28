@@ -25,7 +25,7 @@ const formSlice = createSlice({
     addData(state, action) {
       const { description, amount, category, date, id } = action.payload;
       state.description = description;
-      state.amount = amount;
+      state.amount = Number(amount);
       state.category = category;
       state.date = date;
       state.id = id;
