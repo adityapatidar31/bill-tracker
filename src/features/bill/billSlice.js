@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-const { v4: uuidv4 } = require("uuid");
+import { v4 as uuidv4 } from "uuid";
 
 // const bill = {
 // id:0,
@@ -13,6 +13,7 @@ const { v4: uuidv4 } = require("uuid");
 const initialState = {
   totalAmount: 0,
   bills: [],
+  sortBy: "Date",
 };
 
 const billSlice = createSlice({
@@ -20,6 +21,8 @@ const billSlice = createSlice({
   initialState,
   reducers: {
     addBill(state, action) {
+      action.payload.id = uuidv4();
+      console.log(action.payload);
       state.bills.push(action.payload);
     },
   },
