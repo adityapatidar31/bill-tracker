@@ -89,3 +89,84 @@ body {
     flex-direction: column;
   }
 }
+
+.item-row {
+  display: grid;
+  position: relative;
+  grid-template-columns: 1fr 4fr 1fr 1fr 1fr;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 16px;
+  border-bottom: 1px solid #ccc;
+}
+
+.item-row div {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.item-amount {
+  text-align: left;
+  font-weight: bold;
+}
+
+.item-description {
+  text-align: left;
+}
+
+.item-category,
+.item-date {
+  text-align: center;
+}
+
+.item-actions {
+  text-align: center;
+  cursor: pointer;
+}
+
+.item-actions:hover {
+  color: #007bff;
+}
+
+.item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  position: relative; /* Required for positioning the modal */
+}
+
+.item-actions {
+  cursor: pointer;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.modal {
+  position: absolute;
+  top: 40px; /* Adjust as needed */
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 10;
+}
+
+.modal-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal-button:hover {
+  background: #f5f5f5;
+}

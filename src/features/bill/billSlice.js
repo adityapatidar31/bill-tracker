@@ -12,7 +12,22 @@ import { v4 as uuidv4 } from "uuid";
 
 const initialState = {
   totalAmount: 0,
-  bills: [],
+  bills: [
+    {
+      description: "hey there",
+      category: "Travel",
+      amount: 123,
+      date: "2025-01-29",
+      id: "c5827b4d-78fc-4d85-9786-6cf8c0f2ac3e",
+    },
+    {
+      description: "Go there",
+      category: "Travel",
+      amount: 123,
+      date: "2025-01-29",
+      id: "c5827b4d-78fc-4d85-9786-6cf8c0f2ac3f",
+    },
+  ],
   sortBy: "Date",
 };
 
