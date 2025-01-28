@@ -1,27 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 import { useSelector } from "react-redux";
 
 function Graph() {
-  let { bills } = useSelector((store) => store.bill);
+  const { bills } = useSelector((store) => store.bill);
 
-  console.log(bills);
-
-  bills = [...bills].sort((a, b) => {
-    const dateA = new Date(a.date.split("-").reverse().join("-"));
-    const dateB = new Date(b.date.split("-").reverse().join("-"));
-    return dateA - dateB;
-  });
+  // Memoize sorted bills to avoid unnecessary updates
+  const sortedBills = useMemo(() => {
+    return [...bills].sort((a, b) => {
+      const dateA = new Date(a.date.split("-").reverse().join("-"));
+      const dateB = new Date(b.date.split("-").reverse().join("-"));
+      return dateA - dateB;
+    });
+  }, [bills]);
 
   const [chartData, setChartData] = useState({ labels: [], datasets: [] });
 
   useEffect(() => {
-    const groupedBills = bills.reduce((acc, bill) => {
+    const groupedBills = sortedBills.reduce((acc, bill) => {
       const day = bill.date;
       acc[day] = (acc[day] || 0) + parseFloat(bill.amount);
       return acc;
-    }, []);
+    }, {});
 
     const labels = Object.keys(groupedBills);
     const data = labels.map((date) => groupedBills[date]);
@@ -39,7 +40,7 @@ function Graph() {
         },
       ],
     });
-  }, [bills]); // Update chartData whenever bills change
+  }, [sortedBills]); // Update chartData only when sortedBills changes
 
   const options = {
     responsive: true,
