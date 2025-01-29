@@ -14,15 +14,26 @@ const BillListItem = ({
   isHighlighted,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  console.log(isHighlighted);
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+
+  const dispatch = useDispatch();
+
   const toggleModal = () => {
     setIsModalOpen((prev) => !prev);
   };
 
-  const dispatch = useDispatch();
+  const openConfirmModal = () => {
+    setIsConfirmOpen(true);
+  };
+
+  const closeConfirmModal = () => {
+    setIsConfirmOpen(false);
+    toggleModal();
+  };
 
   function handleDeleteBill() {
     dispatch(deleteBill(id));
+    closeConfirmModal();
   }
 
   function handleUpdateBill() {
@@ -44,13 +55,30 @@ const BillListItem = ({
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="modal">
+        <div className="modal" onClick={(e) => e.stopPropagation()}>
           <button className="modal-button" onClick={handleUpdateBill}>
             <MdEdit /> Edit
           </button>
-          <button className="modal-button" onClick={handleDeleteBill}>
+          <button className="modal-button" onClick={openConfirmModal}>
             <MdDelete /> Delete
           </button>
+        </div>
+      )}
+
+      {/* Confirm Delete Modal */}
+      {isConfirmOpen && (
+        <div className="confirm-modal" onClick={closeConfirmModal}>
+          <div className="confirm-box" onClick={(e) => e.stopPropagation()}>
+            <p>Are you sure you want to delete?</p>
+            <div className="confirm-actions">
+              <button className="cancel-button" onClick={closeConfirmModal}>
+                Cancel
+              </button>
+              <button className="delete-button" onClick={handleDeleteBill}>
+                Yes
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
