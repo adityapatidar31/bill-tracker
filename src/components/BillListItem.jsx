@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteBill } from "../features/bill/billSlice";
 import { addData } from "../features/form/formSlice";
+import { MdEdit, MdDelete } from "react-icons/md";
 
 const BillListItem = ({ amount, description, category, date, id }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,7 +31,7 @@ const BillListItem = ({ amount, description, category, date, id }) => {
       <div className="item-description">{description}</div>
       <div className="item-category">{category}</div>
       <div className="item-date">{date}</div>
-      <div className="item-actions" onClick={toggleModal}>
+      <div className="item-actions item-action-table" onClick={toggleModal}>
         &#8942;
       </div>
 
@@ -38,10 +39,10 @@ const BillListItem = ({ amount, description, category, date, id }) => {
       {isModalOpen && (
         <div className="modal">
           <button className="modal-button" onClick={handleUpdateBill}>
-            Edit
+            <MdEdit /> Edit
           </button>
           <button className="modal-button" onClick={handleDeleteBill}>
-            Delete
+            <MdDelete /> Delete
           </button>
         </div>
       )}
