@@ -4,10 +4,8 @@ import { useSelector } from "react-redux";
 
 const PieChart = () => {
   const { bills } = useSelector((state) => state.bill);
-
   const chartRef = useRef(null);
 
-  // Get current theme from the document
   const getTheme = () =>
     document.documentElement.getAttribute("data-theme") || "light";
 
@@ -26,7 +24,6 @@ const PieChart = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Memoize the aggregated data to avoid unnecessary re-renders
   const categoryTotals = useMemo(() => {
     return bills.reduce((totals, bill) => {
       const { category, amount } = bill;
@@ -37,16 +34,13 @@ const PieChart = () => {
   }, [bills]);
 
   useEffect(() => {
-    // Prepare data for the chart
     const labels = Object.keys(categoryTotals);
     const data = Object.values(categoryTotals);
 
-    // Destroy previous chart instance if it exists
     if (chartRef.current) {
       chartRef.current.destroy();
     }
 
-    // Create the pie chart
     const ctx = document.getElementById("pieChart").getContext("2d");
     chartRef.current = new Chart(ctx, {
       type: "pie",
@@ -69,11 +63,13 @@ const PieChart = () => {
         ],
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             position: "top",
             labels: {
-              color: theme === "dark" ? "#f9f9f9" : "#333", // Dynamic legend text color
+              color: theme === "dark" ? "#f9f9f9" : "#333",
             },
           },
         },
@@ -83,19 +79,14 @@ const PieChart = () => {
     return () => {
       if (chartRef.current) chartRef.current.destroy();
     };
-  }, [categoryTotals, theme]); // Depend on memoized categoryTotals and theme
+  }, [categoryTotals, theme]);
 
   return (
-    <div
-      style={{
-        width: "50%",
-        padding: "1rem",
-        backgroundColor: theme === "dark" ? "#121212" : "#f5f5f5",
-        transition: "all 0.3s ease-in-out",
-      }}
-    >
+    <div className="chart-container">
       <h2>Expense Distribution by Category</h2>
-      <canvas id="pieChart"></canvas>
+      <div className="chart-wrapper">
+        <canvas id="pieChart"></canvas>
+      </div>
     </div>
   );
 };
