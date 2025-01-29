@@ -7,7 +7,7 @@ import PayBills from "./components/PayBills";
 import Navbar from "./components/Navbar";
 
 function App() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
