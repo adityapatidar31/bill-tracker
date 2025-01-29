@@ -11,6 +11,7 @@ const initialState = {
       amount: 123,
       date: "2025-01-29",
       id: "c5827b4d-78fc-4d85-9786-6cf8c0f2ac3e",
+      isHighlighted: false,
     },
     {
       description: "Go there",
@@ -163,6 +164,10 @@ const billSlice = createSlice({
     applyFilter(state, action) {
       console.log(action.payload);
       state.filter = action.payload;
+    },
+    payBills(state, action) {
+      console.log(state.bills);
+      console.log(action.payload);
     },
   },
 });
