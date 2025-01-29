@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { FaMoon, FaSun } from "react-icons/fa";
 import BillList from "./components/BillList";
 import Form from "./components/Form";
 import Graph from "./components/Graph";
 import PieChart from "./components/PieChart";
 import PayBills from "./components/PayBills";
+import Navbar from "./components/Navbar";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -20,15 +20,7 @@ function App() {
 
   return (
     <div className="app">
-      <header className="theme-icon">
-        <button onClick={toggleTheme} className="theme-button">
-          {theme === "light" ? (
-            <FaMoon className="icon" />
-          ) : (
-            <FaSun className="icon" />
-          )}
-        </button>
-      </header>
+      <Navbar toggleTheme={toggleTheme} />
       <Form />
       <PayBills />
       <BillList />
