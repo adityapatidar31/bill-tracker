@@ -4,13 +4,17 @@ import "chart.js/auto";
 import { useSelector } from "react-redux";
 
 function Graph() {
-  const { filter, bills } = useSelector((state) => state.bill);
+  const bills = useSelector((state) => state.bill);
+  const { filter } = bills;
 
-  const filteredBills = bills.filter(
-    (bill) => bill.category === filter || filter === ""
-  );
+  // Filter bills based on the selected category
+  const filteredBills = useMemo(() => {
+    return bills.bills.filter(
+      (bill) => bill.category === filter || filter === ""
+    );
+  }, [bills.bills, filter]);
 
-  // Get current theme from the document
+  // Get the current theme from the document
   const getTheme = () =>
     document.documentElement.getAttribute("data-theme") || "light";
 
@@ -29,7 +33,7 @@ function Graph() {
     return () => observer.disconnect();
   }, []);
 
-  // Memoize sorted bills to avoid unnecessary updates
+  // Sort bills by date
   const sortedBills = useMemo(() => {
     return [...filteredBills].sort((a, b) => {
       const dateA = new Date(a.date.split("-").reverse().join("-"));
@@ -38,9 +42,8 @@ function Graph() {
     });
   }, [filteredBills]);
 
-  const [chartData, setChartData] = useState({ labels: [], datasets: [] });
-
-  useEffect(() => {
+  // Memoize chart data to prevent unnecessary re-renders
+  const chartData = useMemo(() => {
     const groupedBills = sortedBills.reduce((acc, bill) => {
       const day = bill.date;
       acc[day] = (acc[day] || 0) + parseFloat(bill.amount);
@@ -50,7 +53,7 @@ function Graph() {
     const labels = Object.keys(groupedBills);
     const data = labels.map((date) => groupedBills[date]);
 
-    setChartData({
+    return {
       labels,
       datasets: [
         {
@@ -68,45 +71,48 @@ function Graph() {
           tension: 0.4,
         },
       ],
-    });
+    };
   }, [sortedBills, theme]);
 
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: "top",
-        labels: {
-          color: theme === "dark" ? "#f9f9f9" : "#333",
+  const options = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "top",
+          labels: {
+            color: theme === "dark" ? "#f9f9f9" : "#333",
+          },
         },
       },
-    },
-    scales: {
-      x: {
-        ticks: {
-          color: theme === "dark" ? "#f9f9f9" : "#333",
+      scales: {
+        x: {
+          ticks: {
+            color: theme === "dark" ? "#f9f9f9" : "#333",
+          },
+          grid: {
+            color:
+              theme === "dark"
+                ? "rgba(255, 255, 255, 0.2)"
+                : "rgba(0, 0, 0, 0.1)",
+          },
         },
-        grid: {
-          color:
-            theme === "dark"
-              ? "rgba(255, 255, 255, 0.2)"
-              : "rgba(0, 0, 0, 0.1)",
+        y: {
+          ticks: {
+            color: theme === "dark" ? "#f9f9f9" : "#333",
+          },
+          grid: {
+            color:
+              theme === "dark"
+                ? "rgba(255, 255, 255, 0.2)"
+                : "rgba(0, 0, 0, 0.1)",
+          },
         },
       },
-      y: {
-        ticks: {
-          color: theme === "dark" ? "#f9f9f9" : "#333",
-        },
-        grid: {
-          color:
-            theme === "dark"
-              ? "rgba(255, 255, 255, 0.2)"
-              : "rgba(0, 0, 0, 0.1)",
-        },
-      },
-    },
-  };
+    }),
+    [theme]
+  );
 
   return (
     <div
