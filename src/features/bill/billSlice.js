@@ -166,18 +166,21 @@ const billSlice = createSlice({
       });
     },
     updateBill(state, action) {
-      console.log(action.payload);
+      console.log(action.payload.bill);
+
       state.bills = state.bills.filter((bill) => {
-        if (bill.id !== action.payload.id) return true;
-        else {
+        if (bill.id !== action.payload.bill.id) {
+          return true;
+        } else {
           state.totalAmount -= bill.amount;
           return false;
         }
       });
-      state.bills.push(action.payload);
+
+      state.bills.push(action.payload.bill);
+      state.totalAmount += action.payload.bill.amount;
     },
     applyFilter(state, action) {
-      console.log(action.payload);
       state.filter = action.payload;
     },
     payBills(state, action) {

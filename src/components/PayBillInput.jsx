@@ -6,7 +6,6 @@ function PayBillInput() {
   function handleSubmit(e) {
     e.preventDefault();
     const amount = Number(e.target.amount.value);
-    console.log(amount);
 
     dispatch(payBills(amount));
   }

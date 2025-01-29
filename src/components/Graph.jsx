@@ -36,8 +36,8 @@ function Graph() {
   // Sort bills by date
   const sortedBills = useMemo(() => {
     return [...filteredBills].sort((a, b) => {
-      const dateA = new Date(a.date.split("-").reverse().join("-"));
-      const dateB = new Date(b.date.split("-").reverse().join("-"));
+      const dateA = new Date(a?.date.split("-")?.reverse()?.join("-"));
+      const dateB = new Date(b?.date.split("-")?.reverse()?.join("-"));
       return dateA - dateB;
     });
   }, [filteredBills]);

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteBill, updateBill } from "../features/bill/billSlice";
 import { MdEdit, MdDelete } from "react-icons/md";
-import Form from "./Form";
+import UpdateForm from "./UpdateForm";
 
 const BillListItem = ({
   amount,
@@ -46,9 +46,8 @@ const BillListItem = ({
     closeConfirmDeleteModal();
   }
 
-  function handleUpdateBill() {
-    const bill = { description, amount, category, date, id };
-    dispatch(updateBill(bill));
+  function handleUpdateBill(bill) {
+    dispatch(updateBill({ bill }));
     closeConfirmUpdateModal();
   }
 
@@ -98,28 +97,15 @@ const BillListItem = ({
       {isConfirmUpdateOpen && (
         <div className="confirm-modal" onClick={closeConfirmUpdateModal}>
           <div className="confirm-box" onClick={(e) => e.stopPropagation()}>
-            <Form
-              amount={amount}
-              description={description}
-              category={category}
-              date={date}
+            <UpdateForm
+              defaultAmount={amount}
+              defaultDescription={description}
+              defaultCategory={category}
+              defaultDate={date}
               id={id}
-              isHighlighted={isHighlighted}
+              closeConfirmUpdateModal={closeConfirmUpdateModal}
+              handleUpdateBill={handleUpdateBill}
             />
-            <div className="confirm-actions">
-              <button
-                className="cancel-button"
-                onClick={closeConfirmUpdateModal}
-              >
-                Cancel
-              </button>
-              <button
-                className="delete-button update-button"
-                onClick={handleUpdateBill}
-              >
-                Update
-              </button>
-            </div>
           </div>
         </div>
       )}

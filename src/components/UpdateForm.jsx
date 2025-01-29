@@ -1,33 +1,30 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addBill } from "../features/bill/billSlice";
 
-const formatDate = (date) => {
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const year = date.getFullYear();
-  return `${year}-${month}-${day}`;
-};
+function UpdateForm({
+  defaultAmount,
+  defaultDescription,
+  defaultCategory,
+  defaultDate,
+  id,
+  closeConfirmUpdateModal,
+  handleUpdateBill,
+}) {
+  const [description, setDescription] = useState(defaultDescription);
+  const [category, setCategory] = useState(defaultCategory);
+  const [amount, setAmount] = useState(defaultAmount);
+  const [date, setDate] = useState(defaultDate);
 
-const now = new Date();
-const formattedDate = formatDate(now);
-
-const Form = () => {
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [amount, setAmount] = useState("");
-  const [date, setDate] = useState(formattedDate);
-
-  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const bill = { description, category, amount, date };
-    dispatch(addBill(bill));
-    setDate(formattedDate);
-    setAmount("");
-    setCategory("");
-    setDescription("");
+    const bill = {
+      description,
+      category,
+      amount,
+      date,
+      id,
+    };
+    handleUpdateBill(bill);
   };
 
   return (
@@ -90,13 +87,15 @@ const Form = () => {
             className="form-input"
           />
         </label>
-
-        <button type="submit" className="form-button">
-          Submit
-        </button>
+        <div className="confirm-actions">
+          <button className="cancel-button" onClick={closeConfirmUpdateModal}>
+            Cancel
+          </button>
+          <button className="delete-button update-button">Update</button>
+        </div>
       </form>
     </div>
   );
-};
+}
 
-export default Form;
+export default UpdateForm;
