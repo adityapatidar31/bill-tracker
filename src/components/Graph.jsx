@@ -109,7 +109,7 @@ function Graph() {
       style={{
         width: "100%",
         overflowX: "auto",
-        padding: "1rem",
+        paddingBottom: "1rem",
         boxShadow:
           theme === "dark"
             ? "0 4px 8px rgba(0, 0, 0, 0.4)"

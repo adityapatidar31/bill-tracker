@@ -85,14 +85,8 @@ const PieChart = () => {
     <div
       style={{
         width: "50%",
-        margin: "0 auto",
         padding: "1rem",
-        boxShadow:
-          theme === "dark"
-            ? "0 4px 8px rgba(0, 0, 0, 0.4)"
-            : "0 4px 8px rgba(0, 0, 0, 0.1)",
-        borderRadius: "8px",
-        backgroundColor: theme === "dark" ? "#121212 " : "#fff",
+        backgroundColor: theme === "dark" ? "#121212 " : "##d1d1d1",
         transition: "all 0.3s ease-in-out",
       }}
     >
