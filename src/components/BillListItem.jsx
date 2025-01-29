@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteBill } from "../features/bill/billSlice";
-import { addData } from "../features/form/formSlice";
+import { deleteBill, updateBill } from "../features/bill/billSlice";
 import { MdEdit, MdDelete } from "react-icons/md";
+import Form from "./Form";
 
 const BillListItem = ({
   amount,
@@ -14,7 +14,8 @@ const BillListItem = ({
   isHighlighted,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [isConfirmDeleteOpen, setIsConfirmDeleteOpen] = useState(false);
+  const [isConfirmUpdateOpen, setIsConfirmUpdateOpen] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -22,25 +23,33 @@ const BillListItem = ({
     setIsModalOpen((prev) => !prev);
   };
 
-  const openConfirmModal = () => {
-    setIsConfirmOpen(true);
+  const openConfirmDeleteModal = () => {
+    setIsConfirmDeleteOpen(true);
   };
 
-  const closeConfirmModal = () => {
-    setIsConfirmOpen(false);
+  const closeConfirmDeleteModal = () => {
+    setIsConfirmDeleteOpen(false);
+    toggleModal();
+  };
+
+  const openConfirmUpdateModal = () => {
+    setIsConfirmUpdateOpen(true);
+  };
+
+  const closeConfirmUpdateModal = () => {
+    setIsConfirmUpdateOpen(false);
     toggleModal();
   };
 
   function handleDeleteBill() {
     dispatch(deleteBill(id));
-    closeConfirmModal();
+    closeConfirmDeleteModal();
   }
 
   function handleUpdateBill() {
     const bill = { description, amount, category, date, id };
-    dispatch(addData(bill));
-    handleDeleteBill();
-    toggleModal();
+    dispatch(updateBill(bill));
+    closeConfirmUpdateModal();
   }
 
   return (
@@ -56,26 +65,59 @@ const BillListItem = ({
       {/* Modal */}
       {isModalOpen && (
         <div className="modal" onClick={(e) => e.stopPropagation()}>
-          <button className="modal-button" onClick={handleUpdateBill}>
+          <button className="modal-button" onClick={openConfirmUpdateModal}>
             <MdEdit /> Edit
           </button>
-          <button className="modal-button" onClick={openConfirmModal}>
+          <button className="modal-button" onClick={openConfirmDeleteModal}>
             <MdDelete /> Delete
           </button>
         </div>
       )}
 
       {/* Confirm Delete Modal */}
-      {isConfirmOpen && (
-        <div className="confirm-modal" onClick={closeConfirmModal}>
+      {isConfirmDeleteOpen && (
+        <div className="confirm-modal" onClick={closeConfirmDeleteModal}>
           <div className="confirm-box" onClick={(e) => e.stopPropagation()}>
             <p>Are you sure you want to delete?</p>
             <div className="confirm-actions">
-              <button className="cancel-button" onClick={closeConfirmModal}>
+              <button
+                className="cancel-button"
+                onClick={closeConfirmDeleteModal}
+              >
                 Cancel
               </button>
               <button className="delete-button" onClick={handleDeleteBill}>
                 Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Confirm Update Modal */}
+      {isConfirmUpdateOpen && (
+        <div className="confirm-modal" onClick={closeConfirmUpdateModal}>
+          <div className="confirm-box" onClick={(e) => e.stopPropagation()}>
+            <Form
+              amount={amount}
+              description={description}
+              category={category}
+              date={date}
+              id={id}
+              isHighlighted={isHighlighted}
+            />
+            <div className="confirm-actions">
+              <button
+                className="cancel-button"
+                onClick={closeConfirmUpdateModal}
+              >
+                Cancel
+              </button>
+              <button
+                className="delete-button update-button"
+                onClick={handleUpdateBill}
+              >
+                Update
               </button>
             </div>
           </div>

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 
 const initialState = {
-  totalAmount: 0,
+  totalAmount: 4164,
   filter: "",
   bills: [
     {
@@ -166,9 +166,13 @@ const billSlice = createSlice({
       });
     },
     updateBill(state, action) {
-      state.bills.filter((bill) => {
-        if (bill.id !== action.payload) return true;
-        else state.totalAmount -= bill.amount;
+      console.log(action.payload);
+      state.bills = state.bills.filter((bill) => {
+        if (bill.id !== action.payload.id) return true;
+        else {
+          state.totalAmount -= bill.amount;
+          return false;
+        }
       });
       state.bills.push(action.payload);
     },
