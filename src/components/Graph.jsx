@@ -116,6 +116,7 @@ function Graph() {
 
   return (
     <div
+      id="graph"
       style={{
         width: "100%",
         overflowX: "auto",

@@ -5,6 +5,7 @@ body {
   padding: 0;
   background-color: var(--bg-color);
   margin-top: 40px;
+  scroll-behavior: smooth;
 }
 
 .app {
@@ -370,8 +371,12 @@ h2 {
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--text-color);
+  display: flex;
+  justify-content: center;
 }
-
+.website-logo {
+  padding-right: 6px;
+}
 .nav-links {
   display: flex;
   align-items: center;
