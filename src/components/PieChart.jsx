@@ -25,6 +25,7 @@ const PieChart = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Memoize the aggregated data to avoid unnecessary re-renders
   const categoryTotals = useMemo(() => {
     return bills.reduce((totals, bill) => {
       const { category, amount } = bill;
@@ -35,9 +36,11 @@ const PieChart = () => {
   }, [bills]);
 
   useEffect(() => {
+    // Prepare data for the chart
     const labels = Object.keys(categoryTotals);
     const data = Object.values(categoryTotals);
 
+    // Destroy previous chart instance if it exists
     if (chartRef.current) {
       chartRef.current.destroy();
     }
@@ -69,7 +72,7 @@ const PieChart = () => {
           legend: {
             position: "top",
             labels: {
-              color: theme === "dark" ? "#f9f9f9" : "#333",
+              color: theme === "dark" ? "#f9f9f9" : "#333", // Dynamic legend text color
             },
           },
         },
@@ -79,14 +82,14 @@ const PieChart = () => {
     return () => {
       if (chartRef.current) chartRef.current.destroy();
     };
-  }, [categoryTotals, theme]);
+  }, [categoryTotals, theme]); // Depend on memoized categoryTotals and theme
 
   return (
     <div
       style={{
         width: "50%",
         padding: "1rem",
-        backgroundColor: theme === "dark" ? "#121212 " : "##d1d1d1",
+        backgroundColor: theme === "dark" ? "#121212" : "#f5f5f5",
         transition: "all 0.3s ease-in-out",
       }}
     >

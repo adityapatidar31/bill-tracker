@@ -15,8 +15,8 @@ const BillList = () => {
   };
 
   return (
-    <div>
-      <h2>Expense List</h2> {/* Heading added here */}
+    <div className="list-container">
+      <h2>Expense List</h2>
       <div className="item-row">
         <div className="item-amount">
           <FaDollarSign style={iconStyle} /> Amount
