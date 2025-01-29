@@ -8,10 +8,9 @@ import { MdDescription } from "react-icons/md";
 import FilterComponent from "./FilterComponent";
 
 const BillList = () => {
-  const bills = useSelector((state) => state.bill);
+  const { filter, bills } = useSelector((state) => state.bill);
 
-  const { filter } = bills;
-  const filteredBills = bills.bills.filter(
+  const filteredBills = bills.filter(
     (bill) => bill.category === filter || filter === ""
   );
 

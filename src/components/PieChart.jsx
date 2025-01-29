@@ -3,7 +3,8 @@ import { Chart } from "chart.js/auto";
 import { useSelector } from "react-redux";
 
 const PieChart = () => {
-  const { bills } = useSelector((store) => store.bill);
+  const { bills } = useSelector((state) => state.bill);
+
   const chartRef = useRef(null);
 
   // Get current theme from the document

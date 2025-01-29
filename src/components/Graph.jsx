@@ -4,10 +4,9 @@ import "chart.js/auto";
 import { useSelector } from "react-redux";
 
 function Graph() {
-  const bills = useSelector((state) => state.bill);
+  const { filter, bills } = useSelector((state) => state.bill);
 
-  const { filter } = bills;
-  const filteredBills = bills.bills.filter(
+  const filteredBills = bills.filter(
     (bill) => bill.category === filter || filter === ""
   );
 
