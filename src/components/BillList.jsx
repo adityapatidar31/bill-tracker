@@ -8,16 +8,16 @@ import { MdDescription } from "react-icons/md";
 import FilterComponent from "./FilterComponent";
 
 const BillList = () => {
-  const { filter, bills } = useSelector((state) => state.bill);
+  const { filter, bills, totalAmount } = useSelector((state) => state.bill);
 
   const filteredBills = bills.filter(
     (bill) => bill.category === filter || filter === ""
   );
 
-  const totalAmount = filteredBills.reduce(
-    (total, bill) => total + bill.amount,
-    0
-  );
+  const totalAmountDisplay =
+    filter === ""
+      ? totalAmount
+      : filteredBills.reduce((total, bill) => total + bill.amount, 0);
   const iconStyle = {
     marginRight: "8px",
     fontSize: "16px",
@@ -50,7 +50,7 @@ const BillList = () => {
         {filteredBills.map((bill) => (
           <BillListItem key={bill.id} {...bill} />
         ))}
-        <h2>Total Amount: {totalAmount}</h2>
+        <h2>Total Amount: {totalAmountDisplay}</h2>
       </div>
     </div>
   );
