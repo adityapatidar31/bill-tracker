@@ -26,8 +26,10 @@ const BillList = () => {
   };
   return (
     <div className="list-container">
-      <h2>Expense List</h2>
-      <FilterComponent />
+      <div className="flex-2-child">
+        <h2 className="child">Expense List</h2>
+        <FilterComponent />
+      </div>
       <div className="item-row">
         <div className="item-amount">
           <FaDollarSign style={iconStyle} /> Amount
