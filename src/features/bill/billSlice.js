@@ -155,11 +155,22 @@ const billSlice = createSlice({
   initialState,
   reducers: {
     addBill(state, action) {
-      action.payload.id = action.payload.id || uuidv4();
+      action.payload.id = uuidv4();
+      state.totalAmount += action.payload.amount;
       state.bills.push(action.payload);
     },
     deleteBill(state, action) {
-      state.bills = state.bills.filter((bill) => bill.id !== action.payload);
+      state.bills = state.bills.filter((bill) => {
+        if (bill.id !== action.payload) return true;
+        else state.totalAmount -= bill.amount;
+      });
+    },
+    updateBill(state, action) {
+      state.bills.filter((bill) => {
+        if (bill.id !== action.payload) return true;
+        else state.totalAmount -= bill.amount;
+      });
+      state.bills.push(action.payload);
     },
     applyFilter(state, action) {
       console.log(action.payload);
