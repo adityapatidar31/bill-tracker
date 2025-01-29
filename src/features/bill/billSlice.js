@@ -166,13 +166,32 @@ const billSlice = createSlice({
       state.filter = action.payload;
     },
     payBills(state, action) {
-      console.log(state.bills);
-      console.log(action.payload);
+      const { bills } = state;
+      const budget = action.payload;
+
+      const sortedBills = [...bills].sort((a, b) => b.amount - a.amount);
+
+      let totalAmount = 0;
+      let selectedBills = [];
+
+      for (let i = 0; i < sortedBills.length; i++) {
+        if (totalAmount + sortedBills[i].amount <= budget) {
+          totalAmount += sortedBills[i].amount;
+          selectedBills.push(sortedBills[i].id);
+        }
+      }
+
+      state.bills = bills.map((bill) => {
+        if (selectedBills.includes(bill.id)) {
+          return { ...bill, isHighlighted: true };
+        }
+        return { ...bill, isHighlighted: false };
+      });
     },
   },
 });
 
-export const { addBill, deleteBill, updateBill, applyFilter } =
+export const { addBill, deleteBill, updateBill, applyFilter, payBills } =
   billSlice.actions;
 
 export default billSlice.reducer;

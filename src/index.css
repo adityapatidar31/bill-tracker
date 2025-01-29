@@ -137,6 +137,7 @@ body {
 }
 
 .flex-2-child {
+  position: relative;
   display: flex;
 }
 
@@ -253,4 +254,15 @@ body {
 
 .list-container {
   margin-bottom: 12px;
+}
+
+.highlight-row {
+  border: 2px solid var(--input-border-color);
+  border-radius: 10px;
+}
+
+.bill-button {
+  position: absolute;
+  right: 0;
+  top: 10px;
 }

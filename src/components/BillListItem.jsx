@@ -5,9 +5,16 @@ import { deleteBill } from "../features/bill/billSlice";
 import { addData } from "../features/form/formSlice";
 import { MdEdit, MdDelete } from "react-icons/md";
 
-const BillListItem = ({ amount, description, category, date, id }) => {
+const BillListItem = ({
+  amount,
+  description,
+  category,
+  date,
+  id,
+  isHighlighted,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  console.log(isHighlighted);
   const toggleModal = () => {
     setIsModalOpen((prev) => !prev);
   };
@@ -26,7 +33,7 @@ const BillListItem = ({ amount, description, category, date, id }) => {
   }
 
   return (
-    <div className="item-row">
+    <div className={`item-row ${isHighlighted ? "highlight-row" : ""}`}>
       <div className="item-amount">{amount}</div>
       <div className="item-description">{description}</div>
       <div className="item-category">{category}</div>

@@ -4,6 +4,7 @@ import BillList from "./components/BillList";
 import Form from "./components/Form";
 import Graph from "./components/Graph";
 import PieChart from "./components/PieChart";
+import PayBills from "./components/PayBills";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -29,6 +30,7 @@ function App() {
         </button>
       </header>
       <Form />
+      <PayBills />
       <BillList />
       <Graph />
       <PieChart />
