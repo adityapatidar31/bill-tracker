@@ -66,9 +66,6 @@ body {
   padding: 15px;
   border-radius: 50%;
   transition: background-color 0.3s ease;
-}
-
-.theme-button:hover {
   background-color: var(--input-bg-color);
 }
 
@@ -264,7 +261,7 @@ body {
 .bill-button {
   position: absolute;
   right: 0;
-  top: 10px;
+  top: 11px;
 }
 
 .confirm-modal {
