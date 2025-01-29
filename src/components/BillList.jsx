@@ -5,13 +5,14 @@ import { FaDollarSign } from "react-icons/fa";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { BiCategoryAlt } from "react-icons/bi";
 import { MdDescription } from "react-icons/md";
+import FilterComponent from "./FilterComponent";
 
 const BillList = () => {
   const bills = useSelector((state) => state.bill);
 
   const { filter } = bills;
   const filteredBills = bills.bills.filter(
-    (bill) => bill.category === "" || filter == ""
+    (bill) => bill.category === filter || filter === ""
   );
 
   const totalAmount = filteredBills.reduce(
@@ -26,6 +27,7 @@ const BillList = () => {
   return (
     <div className="list-container">
       <h2>Expense List</h2>
+      <FilterComponent />
       <div className="item-row">
         <div className="item-amount">
           <FaDollarSign style={iconStyle} /> Amount

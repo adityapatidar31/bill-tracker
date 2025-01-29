@@ -160,9 +160,14 @@ const billSlice = createSlice({
     deleteBill(state, action) {
       state.bills = state.bills.filter((bill) => bill.id !== action.payload);
     },
+    applyFilter(state, action) {
+      console.log(action.payload);
+      state.filter = action.payload;
+    },
   },
 });
 
-export const { addBill, deleteBill, updateBill } = billSlice.actions;
+export const { addBill, deleteBill, updateBill, applyFilter } =
+  billSlice.actions;
 
 export default billSlice.reducer;
