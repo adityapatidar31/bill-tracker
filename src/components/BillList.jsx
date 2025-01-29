@@ -26,7 +26,7 @@ const BillList = () => {
   return (
     <div>
       <div className="flex-2-child">
-        <h2 className="child">Expense List</h2>
+        <h2 className="child1">Expense List</h2>
         <FilterComponent />
       </div>
       <div className="list-container expense-list-container">

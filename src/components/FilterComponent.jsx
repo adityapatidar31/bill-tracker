@@ -11,7 +11,7 @@ function FilterComponent() {
       name="category"
       onChange={handleChange}
       required
-      className="form-input child"
+      className="form-input child2"
     >
       <option value="">Filter By Category</option>
       <option value="Travel">Travel</option>

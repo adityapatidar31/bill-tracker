@@ -138,8 +138,13 @@ body {
   display: flex;
 }
 
-.child {
+.child1 {
   flex: 1;
+  width: 50%;
+  height: 44px;
+}
+.child2 {
+  flex: 1.5;
   width: 50%;
   height: 44px;
 }
@@ -333,4 +338,8 @@ body {
 
 .delete-button:hover {
   background: #c0392b;
+}
+
+h2 {
+  padding-left: 10px;
 }

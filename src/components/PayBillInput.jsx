@@ -11,7 +11,7 @@ function PayBillInput() {
     dispatch(payBills(amount));
   }
   return (
-    <div className="child">
+    <div className="child2">
       <form onSubmit={handleSubmit} className="flex-2-child">
         <input
           type="text"
@@ -21,7 +21,7 @@ function PayBillInput() {
           placeholder="Enter Amount"
         />
         <button type="submit " className="form-button bill-button">
-          Submit
+          Pay
         </button>
       </form>
     </div>
