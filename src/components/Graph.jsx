@@ -6,6 +6,25 @@ import { useSelector } from "react-redux";
 function Graph() {
   const { bills } = useSelector((store) => store.bill);
 
+  // Get current theme from the document
+  const getTheme = () =>
+    document.documentElement.getAttribute("data-theme") || "light";
+
+  const [theme, setTheme] = useState(getTheme());
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setTheme(getTheme());
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   // Memoize sorted bills to avoid unnecessary updates
   const sortedBills = useMemo(() => {
     return [...bills].sort((a, b) => {
@@ -33,14 +52,20 @@ function Graph() {
         {
           label: "Daily Billing Cycle",
           data,
-          borderColor: "rgba(75, 192, 192, 1)",
-          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          borderColor:
+            theme === "dark"
+              ? "rgba(30, 144, 255, 1)"
+              : "rgba(75, 192, 192, 1)", // Dynamic line color
+          backgroundColor:
+            theme === "dark"
+              ? "rgba(30, 144, 255, 0.2)"
+              : "rgba(75, 192, 192, 0.2)", // Dynamic fill color
           borderWidth: 2,
           tension: 0.4,
         },
       ],
     });
-  }, [sortedBills]); // Update chartData only when sortedBills changes
+  }, [sortedBills, theme]); // Update when sortedBills or theme changes
 
   const options = {
     responsive: true,
@@ -48,17 +73,33 @@ function Graph() {
     plugins: {
       legend: {
         position: "top",
+        labels: {
+          color: theme === "dark" ? "#f9f9f9" : "#333", // Dynamic legend text color
+        },
       },
     },
     scales: {
       x: {
-        beginAtZero: true,
         ticks: {
-          maxTicksLimit: 12,
+          color: theme === "dark" ? "#f9f9f9" : "#333", // Dynamic x-axis label color
+        },
+        grid: {
+          color:
+            theme === "dark"
+              ? "rgba(255, 255, 255, 0.2)"
+              : "rgba(0, 0, 0, 0.1)", // Grid lines color
         },
       },
       y: {
-        beginAtZero: true,
+        ticks: {
+          color: theme === "dark" ? "#f9f9f9" : "#333", // Dynamic y-axis label color
+        },
+        grid: {
+          color:
+            theme === "dark"
+              ? "rgba(255, 255, 255, 0.2)"
+              : "rgba(0, 0, 0, 0.1)", // Grid lines color
+        },
       },
     },
   };
@@ -69,9 +110,13 @@ function Graph() {
         width: "100%",
         overflowX: "auto",
         padding: "1rem",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        boxShadow:
+          theme === "dark"
+            ? "0 4px 8px rgba(0, 0, 0, 0.4)"
+            : "0 4px 8px rgba(0, 0, 0, 0.1)",
         borderRadius: "8px",
-        backgroundColor: "#fff",
+        backgroundColor: theme === "dark" ? "#1e1e1e" : "#fff",
+        transition: "all 0.3s ease-in-out",
       }}
     >
       <div
