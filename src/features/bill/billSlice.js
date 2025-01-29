@@ -219,6 +219,12 @@ const billSlice = createSlice({
 
       const highlightedIndices = minElementsIndices(billsAmounts, amount);
 
+      state.bills.forEach((bill, index) => {
+        if (!highlightedIndices.includes(index)) {
+          bill.isHighlighted = false;
+        }
+      });
+
       highlightedIndices.forEach((index) => {
         if (state.bills[index]) {
           state.bills[index].isHighlighted = true;

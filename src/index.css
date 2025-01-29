@@ -164,6 +164,7 @@ body {
   align-items: center;
   justify-items: start;
   padding: 8px 16px;
+  margin: 3px 0px;
   border-bottom: 1px solid var(--input-border-color);
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -176,6 +177,11 @@ body {
   white-space: nowrap;
   text-overflow: ellipsis;
   text-align: start;
+}
+
+.table-row:hover {
+  border: 2px solid var(--button-hover-bg-color);
+  border-radius: 10px;
 }
 
 .item-amount,
@@ -229,6 +235,7 @@ body {
 
 .modal-button:hover {
   background: var(--button-hover-bg-color);
+  color: #fff;
   border-radius: 5px;
 }
 

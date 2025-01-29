@@ -52,7 +52,9 @@ const BillListItem = ({
   }
 
   return (
-    <div className={`item-row ${isHighlighted ? "highlight-row" : ""}`}>
+    <div
+      className={`item-row table-row ${isHighlighted ? "highlight-row" : ""}`}
+    >
       <div className="item-amount">{amount}</div>
       <div className="item-description">{description}</div>
       <div className="item-category">{category}</div>
