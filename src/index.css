@@ -149,6 +149,12 @@ body {
     flex-direction: column;
   }
 }
+
+.expense-list-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
 .item-row {
   display: grid;
   grid-template-columns: 1fr 4fr 1fr 1fr 1fr;
@@ -160,6 +166,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   position: relative;
+  min-width: 880px;
 }
 
 .item-row div {
@@ -183,6 +190,7 @@ body {
   padding: 5px;
   text-align: center;
 }
+
 .item-action-table {
   padding-left: 30px;
 }

@@ -24,32 +24,34 @@ const BillList = () => {
     color: "var(--text-color)",
   };
   return (
-    <div className="list-container">
+    <div>
       <div className="flex-2-child">
         <h2 className="child">Expense List</h2>
         <FilterComponent />
       </div>
-      <div className="item-row">
-        <div className="item-amount">
-          <FaDollarSign style={iconStyle} /> Amount
+      <div className="list-container expense-list-container">
+        <div className="item-row">
+          <div className="item-amount">
+            <FaDollarSign style={iconStyle} /> Amount
+          </div>
+          <div className="item-description">
+            <MdDescription style={iconStyle} />
+            Description
+          </div>
+          <div className="item-category">
+            <BiCategoryAlt style={iconStyle} /> Category
+          </div>
+          <div className="item-date">
+            <AiOutlineCalendar style={iconStyle} />
+            Date
+          </div>
+          <div className="item-actions">Action</div>
         </div>
-        <div className="item-description">
-          <MdDescription style={iconStyle} />
-          Description
-        </div>
-        <div className="item-category">
-          <BiCategoryAlt style={iconStyle} /> Category
-        </div>
-        <div className="item-date">
-          <AiOutlineCalendar style={iconStyle} />
-          Date
-        </div>
-        <div className="item-actions">Action</div>
+        {filteredBills.map((bill) => (
+          <BillListItem key={bill.id} {...bill} />
+        ))}
+        <h2>Total Amount: {totalAmount}</h2>
       </div>
-      {filteredBills.map((bill) => (
-        <BillListItem key={bill.id} {...bill} />
-      ))}
-      <h2>Total Amount: {totalAmount}</h2>
     </div>
   );
 };
