@@ -1,13 +1,30 @@
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef, useMemo, useState } from "react";
 import { Chart } from "chart.js/auto";
 import { useSelector } from "react-redux";
 
 const PieChart = () => {
   const { bills } = useSelector((store) => store.bill);
-
   const chartRef = useRef(null);
 
-  // Memoize the aggregated data to avoid unnecessary re-renders
+  // Get current theme from the document
+  const getTheme = () =>
+    document.documentElement.getAttribute("data-theme") || "light";
+
+  const [theme, setTheme] = useState(getTheme());
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setTheme(getTheme());
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const categoryTotals = useMemo(() => {
     return bills.reduce((totals, bill) => {
       const { category, amount } = bill;
@@ -18,11 +35,9 @@ const PieChart = () => {
   }, [bills]);
 
   useEffect(() => {
-    // Prepare data for the chart
     const labels = Object.keys(categoryTotals);
     const data = Object.values(categoryTotals);
 
-    // Destroy previous chart instance if it exists
     if (chartRef.current) {
       chartRef.current.destroy();
     }
@@ -53,6 +68,9 @@ const PieChart = () => {
         plugins: {
           legend: {
             position: "top",
+            labels: {
+              color: theme === "dark" ? "#f9f9f9" : "#333",
+            },
           },
         },
       },
@@ -61,10 +79,23 @@ const PieChart = () => {
     return () => {
       if (chartRef.current) chartRef.current.destroy();
     };
-  }, [categoryTotals]); // Depend only on the memoized category totals
+  }, [categoryTotals, theme]);
 
   return (
-    <div style={{ width: "50%", margin: "0 auto" }}>
+    <div
+      style={{
+        width: "50%",
+        margin: "0 auto",
+        padding: "1rem",
+        boxShadow:
+          theme === "dark"
+            ? "0 4px 8px rgba(0, 0, 0, 0.4)"
+            : "0 4px 8px rgba(0, 0, 0, 0.1)",
+        borderRadius: "8px",
+        backgroundColor: theme === "dark" ? "#121212 " : "#fff",
+        transition: "all 0.3s ease-in-out",
+      }}
+    >
       <canvas id="pieChart"></canvas>
     </div>
   );
