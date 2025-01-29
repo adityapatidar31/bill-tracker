@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FaMoon, FaSun } from "react-icons/fa";
 import BillList from "./components/BillList";
 import Form from "./components/Form";
 import Graph from "./components/Graph";
@@ -18,9 +19,13 @@ function App() {
 
   return (
     <div className="app">
-      <header>
-        <button onClick={toggleTheme}>
-          Switch to {theme === "light" ? "Dark" : "Light"} Theme
+      <header className="theme-icon">
+        <button onClick={toggleTheme} className="theme-button">
+          {theme === "light" ? (
+            <FaMoon className="icon" />
+          ) : (
+            <FaSun className="icon" />
+          )}
         </button>
       </header>
       <Form />
