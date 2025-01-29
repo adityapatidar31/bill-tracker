@@ -239,3 +239,7 @@ body {
 [data-theme="dark"] .item-actions:hover {
   color: #1e88e5;
 }
+
+.list-container {
+  margin-bottom: 12px;
+}
