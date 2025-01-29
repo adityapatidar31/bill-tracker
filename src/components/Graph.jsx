@@ -4,7 +4,12 @@ import "chart.js/auto";
 import { useSelector } from "react-redux";
 
 function Graph() {
-  const { bills } = useSelector((store) => store.bill);
+  const bills = useSelector((state) => state.bill);
+
+  const { filter } = bills;
+  const filteredBills = bills.bills.filter(
+    (bill) => bill.category === filter || filter === ""
+  );
 
   // Get current theme from the document
   const getTheme = () =>
@@ -27,12 +32,12 @@ function Graph() {
 
   // Memoize sorted bills to avoid unnecessary updates
   const sortedBills = useMemo(() => {
-    return [...bills].sort((a, b) => {
+    return [...filteredBills].sort((a, b) => {
       const dateA = new Date(a.date.split("-").reverse().join("-"));
       const dateB = new Date(b.date.split("-").reverse().join("-"));
       return dateA - dateB;
     });
-  }, [bills]);
+  }, [filteredBills]);
 
   const [chartData, setChartData] = useState({ labels: [], datasets: [] });
 
@@ -55,17 +60,17 @@ function Graph() {
           borderColor:
             theme === "dark"
               ? "rgba(30, 144, 255, 1)"
-              : "rgba(75, 192, 192, 1)", // Dynamic line color
+              : "rgba(75, 192, 192, 1)",
           backgroundColor:
             theme === "dark"
               ? "rgba(30, 144, 255, 0.2)"
-              : "rgba(75, 192, 192, 0.2)", // Dynamic fill color
+              : "rgba(75, 192, 192, 0.2)",
           borderWidth: 2,
           tension: 0.4,
         },
       ],
     });
-  }, [sortedBills, theme]); // Update when sortedBills or theme changes
+  }, [sortedBills, theme]);
 
   const options = {
     responsive: true,
@@ -74,31 +79,31 @@ function Graph() {
       legend: {
         position: "top",
         labels: {
-          color: theme === "dark" ? "#f9f9f9" : "#333", // Dynamic legend text color
+          color: theme === "dark" ? "#f9f9f9" : "#333",
         },
       },
     },
     scales: {
       x: {
         ticks: {
-          color: theme === "dark" ? "#f9f9f9" : "#333", // Dynamic x-axis label color
+          color: theme === "dark" ? "#f9f9f9" : "#333",
         },
         grid: {
           color:
             theme === "dark"
               ? "rgba(255, 255, 255, 0.2)"
-              : "rgba(0, 0, 0, 0.1)", // Grid lines color
+              : "rgba(0, 0, 0, 0.1)",
         },
       },
       y: {
         ticks: {
-          color: theme === "dark" ? "#f9f9f9" : "#333", // Dynamic y-axis label color
+          color: theme === "dark" ? "#f9f9f9" : "#333",
         },
         grid: {
           color:
             theme === "dark"
               ? "rgba(255, 255, 255, 0.2)"
-              : "rgba(0, 0, 0, 0.1)", // Grid lines color
+              : "rgba(0, 0, 0, 0.1)",
         },
       },
     },
@@ -119,7 +124,7 @@ function Graph() {
         transition: "all 0.3s ease-in-out",
       }}
     >
-      <h2>Billing Trends Over Time</h2> {/* Heading added here */}
+      <h2>Billing Trends Over Time</h2>
       <div
         style={{
           height: "400px",
