@@ -25,6 +25,7 @@ const Form = () => {
 
   return (
     <div className="form-container">
+      <h2>Add New Bill</h2> {/* Heading added here */}
       <form onSubmit={handleSubmit} className="expense-form">
         <div className="form-row">
           <label className="form-label">

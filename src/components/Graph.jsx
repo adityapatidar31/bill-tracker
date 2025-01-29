@@ -119,6 +119,7 @@ function Graph() {
         transition: "all 0.3s ease-in-out",
       }}
     >
+      <h2>Billing Trends Over Time</h2> {/* Heading added here */}
       <div
         style={{
           height: "400px",

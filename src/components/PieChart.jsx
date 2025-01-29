@@ -96,6 +96,7 @@ const PieChart = () => {
         transition: "all 0.3s ease-in-out",
       }}
     >
+      <h2>Expense Distribution by Category</h2>
       <canvas id="pieChart"></canvas>
     </div>
   );

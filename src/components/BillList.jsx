@@ -6,15 +6,17 @@ import { AiOutlineCalendar } from "react-icons/ai";
 import { BiCategoryAlt } from "react-icons/bi";
 import { MdDescription } from "react-icons/md";
 
-const ExpenseList = () => {
+const BillList = () => {
   const bills = useSelector((state) => state.bill.bills);
   const iconStyle = {
     marginRight: "8px",
     fontSize: "16px",
     color: "var(--text-color)",
   };
+
   return (
     <div>
+      <h2>Expense List</h2> {/* Heading added here */}
       <div className="item-row">
         <div className="item-amount">
           <FaDollarSign style={iconStyle} /> Amount
@@ -39,4 +41,4 @@ const ExpenseList = () => {
   );
 };
 
-export default ExpenseList;
+export default BillList;
