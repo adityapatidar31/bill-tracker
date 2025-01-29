@@ -1,40 +1,47 @@
 /* eslint-disable react/prop-types */
-import { addBill } from "../features/bill/billSlice";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addData, clearData } from "../features/form/formSlice";
+import { addBill } from "../features/bill/billSlice";
 
-const Form = ({ description, category, amount, date, id, updateBill }) => {
+const formatDate = (date) => {
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${year}-${month}-${day}`;
+};
+
+const now = new Date();
+const formattedDate = formatDate(now);
+
+const Form = () => {
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [amount, setAmount] = useState("");
+  const [date, setDate] = useState(formattedDate);
+
   const dispatch = useDispatch();
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const bill = { description, category, amount, date, id };
-    dispatch(clearData());
+    const bill = { description, category, amount, date };
     dispatch(addBill(bill));
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    dispatch(
-      addData({ ...{ description, category, amount, date, id }, [name]: value })
-    );
+    setDate(formattedDate);
+    setAmount("");
+    setCategory("");
+    setDescription("");
   };
 
   return (
     <div className="form-container">
-      <h2>{id ? "Update" : "Add New"} Bill</h2>
-      <form
-        onSubmit={updateBill || handleSubmit}
-        className={`expense-form ${id ? "update-mode" : ""}`}
-      >
+      <h2> Add New Bill</h2>
+      <form onSubmit={handleSubmit} className="expense-form">
         <label className="form-label">
           Description
           <input
             type="text"
             name="description"
             value={description}
-            onChange={handleChange}
+            onChange={(e) => setDescription(e.target.value)}
             required
             className="form-input"
           />
@@ -45,7 +52,7 @@ const Form = ({ description, category, amount, date, id, updateBill }) => {
           <select
             name="category"
             value={category}
-            onChange={handleChange}
+            onChange={(e) => setCategory(e.target.value)}
             required
             className="form-input"
           >
@@ -67,7 +74,7 @@ const Form = ({ description, category, amount, date, id, updateBill }) => {
             name="amount"
             min="0"
             value={amount}
-            onChange={handleChange}
+            onChange={(e) => setAmount(Number(e.target.value))}
             required
             className="form-input"
           />
@@ -79,17 +86,15 @@ const Form = ({ description, category, amount, date, id, updateBill }) => {
             type="date"
             name="date"
             value={date}
-            onChange={handleChange}
+            onChange={(e) => setDate(e.target.value)}
             required
             className="form-input"
           />
         </label>
 
-        {!id && (
-          <button type="submit" className="form-button">
-            Submit
-          </button>
-        )}
+        <button type="submit" className="form-button">
+          Submit
+        </button>
       </form>
     </div>
   );
