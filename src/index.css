@@ -450,13 +450,27 @@ h2 {
 }
 
 /* Pagination component */
+@media (max-width: 450px) {
+  .pagination-container {
+    margin-right: 0;
+    top: -60px;
+  }
+
+  .total-amount {
+    margin-top: 80px;
+  }
+}
+
 .pagination-container {
   display: flex;
+  position: relative;
   justify-content: end;
   margin-right: 20px;
 }
 .pagination {
   display: flex;
+  position: absolute;
+  top: -82px;
   justify-content: center;
   align-items: center;
   gap: 10px;

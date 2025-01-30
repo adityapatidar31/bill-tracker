@@ -58,14 +58,15 @@ function BillList() {
         {paginatedBills.map((bill) => (
           <BillListItem key={bill.id} {...bill} />
         ))}
-        <div className="pagination-container">
-          <Pagination
-            currentPage={currentPage}
-            isFirstPage={isFirstPage}
-            isLastPage={isLastPage}
-          />
-        </div>
-        <h2>Total Amount: {totalAmountDisplay}</h2>
+
+        <h2 className="total-amount">Total Amount: {totalAmountDisplay}</h2>
+      </div>
+      <div className="pagination-container">
+        <Pagination
+          currentPage={currentPage}
+          isFirstPage={isFirstPage}
+          isLastPage={isLastPage}
+        />
       </div>
     </div>
   );
