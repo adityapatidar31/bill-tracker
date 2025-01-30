@@ -15,9 +15,10 @@ function App() {
   }, [theme]);
 
   // Toggle the theme
-  const toggleTheme = () => {
+  function toggleTheme() {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-  };
+    console.log(theme);
+  }
 
   return (
     <div className="app">
@@ -28,7 +29,7 @@ function App() {
         draggable
         theme={theme}
       />
-      <Navbar toggleTheme={toggleTheme} />
+      <Navbar toggleTheme={toggleTheme} theme={theme} />
       <Form />
       <PayBills />
       <BillList />

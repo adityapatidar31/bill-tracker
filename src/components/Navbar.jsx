@@ -16,14 +16,17 @@ function Navbar({ toggleTheme, theme }) {
       <div className={`nav-links ${isOpen ? "open" : ""}`}>
         <a href="#graph">Graph</a>
         <a href="#pieChart">PieChart</a>
-        <header className="theme-icon">
-          <button onClick={toggleTheme} className="theme-button">
+        <header className="theme-icon" onClick={toggleTheme}>
+          <button className="theme-button">
             {theme === "light" ? (
               <FaMoon className="icon" />
             ) : (
               <FaSun className="icon" />
             )}
           </button>
+          <span className="theme-text">
+            {theme === "light" ? "Dark" : "Light"}
+          </span>
         </header>
       </div>
       <div className="menu-icon" onClick={() => setIsOpen(!isOpen)}>

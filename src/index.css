@@ -21,9 +21,21 @@ body {
 }
 
 .theme-icon {
-  border-radius: 50%;
+  border-radius: 10px;
+  display: flex;
+  padding: 0px 3px;
+  align-items: center;
 }
 
+.theme-text {
+  padding-left: 5px;
+  display: flex;
+  align-items: center;
+}
+.theme-text:hover {
+  padding-left: 5px;
+  cursor: pointer;
+}
 /* Default theme colors */
 :root {
   --bg-color: #f5f5f5;
