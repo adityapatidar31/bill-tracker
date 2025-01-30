@@ -7,7 +7,7 @@ import { BiCategoryAlt } from "react-icons/bi";
 import { MdDescription } from "react-icons/md";
 import FilterComponent from "./FilterComponent";
 
-const BillList = () => {
+function BillList() {
   const { filter, bills, totalAmount } = useSelector((state) => state.bill);
 
   const filteredBills = bills.filter(
@@ -54,6 +54,6 @@ const BillList = () => {
       </div>
     </div>
   );
-};
+}
 
 export default BillList;

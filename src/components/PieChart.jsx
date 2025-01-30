@@ -2,7 +2,7 @@ import { useEffect, useRef, useMemo, useState } from "react";
 import { Chart } from "chart.js/auto";
 import { useSelector } from "react-redux";
 
-const PieChart = () => {
+function PieChart() {
   const { bills } = useSelector((state) => state.bill);
   const chartRef = useRef(null);
 
@@ -89,6 +89,6 @@ const PieChart = () => {
       </div>
     </div>
   );
-};
+}
 
 export default PieChart;

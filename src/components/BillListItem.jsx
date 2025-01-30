@@ -5,14 +5,14 @@ import { deleteBill, updateBill } from "../features/bill/billSlice";
 import { MdEdit, MdDelete } from "react-icons/md";
 import UpdateForm from "./UpdateForm";
 
-const BillListItem = ({
+function BillListItem({
   amount,
   description,
   category,
   date,
   id,
   isHighlighted,
-}) => {
+}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isConfirmDeleteOpen, setIsConfirmDeleteOpen] = useState(false);
   const [isConfirmUpdateOpen, setIsConfirmUpdateOpen] = useState(false);
@@ -113,6 +113,6 @@ const BillListItem = ({
       )}
     </div>
   );
-};
+}
 
 export default BillListItem;
