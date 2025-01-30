@@ -186,6 +186,7 @@ const billSlice = createSlice({
     addBill(state, action) {
       action.payload.id = uuidv4();
       state.totalAmount += action.payload.amount;
+      state.bills = [action.payload, ...state.bills];
       state.bills.push(action.payload);
     },
     deleteBill(state, action) {
@@ -204,7 +205,8 @@ const billSlice = createSlice({
         }
       });
 
-      state.bills.push(action.payload.bill);
+      state.bills = [action.payload.bill, ...state.bills];
+
       state.totalAmount += action.payload.bill.amount;
     },
     applyFilter(state, action) {
@@ -212,11 +214,8 @@ const billSlice = createSlice({
     },
     payBills(state, action) {
       const amount = action.payload;
-
       const billsAmounts = state.bills.map((bill) => bill.amount);
-
       const highlightedIndices = minElementsIndices(billsAmounts, amount);
-
       state.bills.forEach((bill, index) => {
         if (!highlightedIndices.includes(index)) {
           bill.isHighlighted = false;
