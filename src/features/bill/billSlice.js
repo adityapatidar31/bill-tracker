@@ -230,10 +230,20 @@ const billSlice = createSlice({
         }
       });
     },
+    setCurrentPage(state, action) {
+      console.log(action.payload);
+      state.currentPage = action.payload;
+    },
   },
 });
 
-export const { addBill, deleteBill, updateBill, applyFilter, payBills } =
-  billSlice.actions;
+export const {
+  addBill,
+  deleteBill,
+  updateBill,
+  applyFilter,
+  payBills,
+  setCurrentPage,
+} = billSlice.actions;
 
 export default billSlice.reducer;

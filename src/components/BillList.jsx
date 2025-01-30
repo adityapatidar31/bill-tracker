@@ -5,6 +5,7 @@ import { AiOutlineCalendar } from "react-icons/ai";
 import { BiCategoryAlt } from "react-icons/bi";
 import { MdDescription } from "react-icons/md";
 import FilterComponent from "./FilterComponent";
+import Pagination from "./Pagination";
 
 function BillList() {
   const { filter, bills, totalAmount, currentPage, pageSize } = useSelector(
@@ -58,6 +59,11 @@ function BillList() {
         {paginatedBills.map((bill) => (
           <BillListItem key={bill.id} {...bill} />
         ))}
+        <Pagination
+          currentPage={currentPage}
+          isFirstPage={isFirstPage}
+          isLastPage={isLastPage}
+        />
         <h2>Total Amount: {totalAmountDisplay}</h2>
       </div>
     </div>
