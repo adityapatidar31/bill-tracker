@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 
 const initialState = {
   totalAmount: 4164,
+  pageSize: 7,
+  currentPage: 3,
   filter: "",
   bills: [
     {
