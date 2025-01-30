@@ -17,7 +17,6 @@ function App() {
   // Toggle the theme
   function toggleTheme() {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-    console.log(theme);
   }
 
   return (

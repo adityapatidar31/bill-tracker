@@ -16,12 +16,13 @@ function Pagination({ currentPage, isFirstPage, isLastPage }) {
       dispatch(setCurrentPage(currentPage + 1));
     }
   };
-
+  if (isFirstPage && isLastPage) return;
   return (
     <div className="pagination">
       <button onClick={handlePrevPage} disabled={isFirstPage}>
-        Previous
+        Prev
       </button>
+
       <span>Page {currentPage}</span>
       <button onClick={handleNextPage} disabled={isLastPage}>
         Next

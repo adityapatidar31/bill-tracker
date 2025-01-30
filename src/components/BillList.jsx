@@ -30,7 +30,6 @@ function BillList() {
   const paginatedBills = filteredBills.slice(startIndex, startIndex + pageSize);
   const isFirstPage = currentPage === 1;
   const isLastPage = startIndex + pageSize >= filteredBills.length;
-  console.log(isFirstPage, isLastPage);
 
   return (
     <div>
@@ -59,11 +58,13 @@ function BillList() {
         {paginatedBills.map((bill) => (
           <BillListItem key={bill.id} {...bill} />
         ))}
-        <Pagination
-          currentPage={currentPage}
-          isFirstPage={isFirstPage}
-          isLastPage={isLastPage}
-        />
+        <div className="pagination-container">
+          <Pagination
+            currentPage={currentPage}
+            isFirstPage={isFirstPage}
+            isLastPage={isLastPage}
+          />
+        </div>
         <h2>Total Amount: {totalAmountDisplay}</h2>
       </div>
     </div>

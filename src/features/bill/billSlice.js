@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const initialState = {
   totalAmount: 4164,
-  pageSize: 7,
+  pageSize: 8,
   currentPage: 3,
   filter: "",
   bills: [
@@ -213,6 +213,7 @@ const billSlice = createSlice({
     },
     applyFilter(state, action) {
       state.filter = action.payload;
+      state.currentPage = 1;
     },
     payBills(state, action) {
       const amount = action.payload;
@@ -231,7 +232,6 @@ const billSlice = createSlice({
       });
     },
     setCurrentPage(state, action) {
-      console.log(action.payload);
       state.currentPage = action.payload;
     },
   },

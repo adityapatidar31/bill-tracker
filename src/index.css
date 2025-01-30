@@ -36,7 +36,7 @@ body {
   padding-left: 5px;
   cursor: pointer;
 }
-/* Default theme colors */
+
 :root {
   --bg-color: #f5f5f5;
   --text-color: #1a1a1a;
@@ -48,6 +48,7 @@ body {
   --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Default theme colors */
 [data-theme="dark"] {
   --bg-color: #121212;
   --text-color: #e0e0e0;
@@ -446,4 +447,42 @@ h2 {
   .menu-icon {
     display: block;
   }
+}
+
+/* Pagination component */
+.pagination-container {
+  display: flex;
+  justify-content: end;
+  margin-right: 20px;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: var(--button-bg-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: var(--button-hover-bg-color);
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  color: var(--text-color);
+  font-weight: bold;
 }
