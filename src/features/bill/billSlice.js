@@ -8,18 +8,19 @@ const initialState = {
   filter: "",
   bills: [
     {
-      description: "hey there",
+      description: "Flight to NY",
       category: "Travel",
-      amount: 123,
-      date: "2025-01-29",
-      id: "c5827b4d-78fc-4d85-9786-6cf8c0f2ac3e",
+      amount: 250,
+      date: "2025-02-05",
+      id: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6",
     },
+
     {
-      description: "Go there",
+      description: "Tour Guide Fee",
       category: "Travel",
-      amount: 123,
-      date: "2025-01-29",
-      id: "c5827b4d-78fc-4d85-9786-6cf8c0f2ac3f",
+      amount: 100,
+      date: "2026-02-25",
+      id: "m3n4o5p6-q7r8-s9t0-u1v2-w3x4y5z6a7b8",
     },
     {
       description: "Lunch break",

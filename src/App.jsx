@@ -26,6 +26,7 @@ function App() {
         autoClose={3000}
         hideProgressBar={false}
         draggable
+        rtl={false}
         theme={theme}
       />
       <Navbar toggleTheme={toggleTheme} theme={theme} />

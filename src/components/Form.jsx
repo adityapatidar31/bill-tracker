@@ -23,17 +23,13 @@ function Form() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    function showToastMessage() {
-      toast.success("New bill add successfully !");
-    }
-
     const bill = { description, category, amount, date };
     dispatch(addBill(bill));
     setDate(formattedDate);
     setAmount("");
     setCategory("");
     setDescription("");
-    showToastMessage();
+    toast.success("New bill add successfully !");
   };
 
   return (
