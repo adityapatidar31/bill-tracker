@@ -5,6 +5,7 @@ import Graph from "./components/Graph";
 import PieChart from "./components/PieChart";
 import PayBills from "./components/PayBills";
 import Navbar from "./components/Navbar";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [theme, setTheme] = useState("dark");
@@ -20,6 +21,14 @@ function App() {
 
   return (
     <div className="app">
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        // pauseOnFocusLoss
+        draggable
+        theme={theme}
+      />
       <Navbar toggleTheme={toggleTheme} />
       <Form />
       <PayBills />

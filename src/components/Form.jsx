@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addBill } from "../features/bill/billSlice";
+import { toast } from "react-toastify";
 
 const formatDate = (date) => {
   const day = String(date.getDate()).padStart(2, "0");
@@ -21,13 +22,16 @@ const Form = () => {
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    function showToastMessage() {
+      toast.success("New bill add successfully !");
+    }
     const bill = { description, category, amount, date };
     dispatch(addBill(bill));
     setDate(formattedDate);
     setAmount("");
     setCategory("");
     setDescription("");
+    showToastMessage();
   };
 
   return (
