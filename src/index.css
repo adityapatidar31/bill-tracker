@@ -133,17 +133,21 @@ body {
 .flex-2-child {
   position: relative;
   display: flex;
+  align-items: center;
 }
 
 .child1 {
   flex: 1;
+  display: flex;
   width: 50%;
   height: 44px;
+  align-items: center;
 }
 .child2 {
   flex: 1.5;
   width: 50%;
   height: 44px;
+  margin-bottom: 7px;
 }
 
 @media (max-width: 768px) {
