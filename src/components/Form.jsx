@@ -22,9 +22,11 @@ const Form = () => {
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
+
     function showToastMessage() {
       toast.success("New bill add successfully !");
     }
+
     const bill = { description, category, amount, date };
     dispatch(addBill(bill));
     setDate(formattedDate);

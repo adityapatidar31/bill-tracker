@@ -25,7 +25,6 @@ function App() {
         position="top-center"
         autoClose={3000}
         hideProgressBar={false}
-        // pauseOnFocusLoss
         draggable
         theme={theme}
       />

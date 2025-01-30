@@ -195,8 +195,6 @@ const billSlice = createSlice({
       });
     },
     updateBill(state, action) {
-      console.log(action.payload.bill);
-
       state.bills = state.bills.filter((bill) => {
         if (bill.id !== action.payload.bill.id) {
           return true;

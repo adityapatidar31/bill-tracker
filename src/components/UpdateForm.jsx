@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 function UpdateForm({
   defaultAmount,
@@ -25,11 +26,12 @@ function UpdateForm({
       id,
     };
     handleUpdateBill(bill);
+    toast.success("Bill update successfully !");
   };
 
   return (
     <div className="form-container">
-      <h2> Add New Bill</h2>
+      <h2> Update Bill</h2>
       <form onSubmit={handleSubmit} className="expense-form">
         <label className="form-label">
           Description
