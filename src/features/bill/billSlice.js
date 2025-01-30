@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 const initialState = {
   totalAmount: 4164,
   pageSize: 8,
-  currentPage: 3,
+  currentPage: 1,
   filter: "",
   bills: [
     {
